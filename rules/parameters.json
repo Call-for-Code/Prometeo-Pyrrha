@@ -1,0 +1,12 @@
+{
+    "limits_co":{
+            "verde":20,
+            "rojo":26
+    },
+
+    "limits_temperature":{
+            "verde":35,
+            "rojo":41
+    }
+
+}

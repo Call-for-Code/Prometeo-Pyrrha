@@ -1,0 +1,4 @@
+ --- applications:
+ - name: Core Decision Api
+ - random-route: true
+ - memory: 256M
