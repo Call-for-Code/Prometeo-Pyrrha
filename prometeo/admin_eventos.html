@@ -1,0 +1,108 @@
+{% extends "/base.html" %}
+
+{% block content %}
+  <section role="main" class="content-body">
+    <header class="page-header">
+      <h2>Administración de Eventos</h2>
+
+      <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+          <li>
+            <a href="index.html">
+              <i class="fa fa-home"></i>
+            </a>
+          </li>
+          <li><span>Administración</span></li>
+          <li><span>Eventos</span></li>
+        </ol>
+
+        <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+      </div>
+    </header>
+
+    <section class="panel">
+      <header class="panel-heading">
+        <div class="panel-actions">
+          <a href="#" class="fa fa-caret-down"></a>
+        </div>
+
+        <h2 class="panel-title">Eventos</h2>
+      </header>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="mb-md">
+              <a href="#" id="addToTable" class="btn btn-primary">Añadir <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-bordered table-striped mb-none" id="datatable-details">
+          <thead>
+            <tr>
+              <th>Id Evento</th>
+              <th>Tipo Evento</th>
+              <th>Num Bomberos</th>
+              <th>Tipo combustible</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="gradeA">
+              <td>E001</td>
+              <td>Quema prescrita</td>
+              <td>5</td>
+              <td>Abetos</td>
+              <td>En curso</td>
+            </tr>
+            <tr class="gradeA">
+              <td>E002</td>
+              <td>Quema prescrita</td>
+              <td>5</td>
+              <td>Campo de trigo</td>
+              <td>En curso</td>
+            </tr>
+            <tr class="gradeA">
+              <td>E002</td>
+              <td>Fuego forestal</td>
+              <td>5</td>
+              <td>Pinos</td>
+              <td>Finalizado</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- Vendor -->
+  <script src="assets/vendor/jquery/jquery.js"></script>
+  <script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+  <script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+  <script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+  <script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+  <!-- Specific Page Vendor -->
+  <script src="assets/vendor/select2/select2.js"></script>
+  <script src="assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+  <script src="assets/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js"></script>
+  <script src="assets/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+  <!-- Theme Base, Components and Settings -->
+  <script src="assets/javascripts/theme.js"></script>
+
+  <!-- Theme Custom -->
+  <script src="assets/javascripts/theme.custom.js"></script>
+
+  <!-- Theme Initialization Files -->
+  <script src="assets/javascripts/theme.init.js"></script>
+
+
+  <!-- Examples -->
+  <script src="assets/javascripts/tables/examples.datatables.default.js"></script>
+  <script src="assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
+  <script src="assets/javascripts/tables/examples.datatables.tabletools.js"></script>
+
+{% endblock %}
