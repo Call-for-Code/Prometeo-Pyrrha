@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background-image: url("img/forest.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+#imggame {
+  border:  5px solid Red;
+  padding: 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  width:150px;
+  height:150px;
+}
+img{
+  max-width:40%;
+  max-height:40%;
+}
+.img-wrap{
+  float:left;
+  width:90%;
+  margin-right:10%;
+}
+.desc{
+  position: relative;
+  top: 150px;
+  width:50%;
+  font-weight: bold;
+  color: Lime;
+  font-family: Geneva, Tahoma, Verdana, sans-serif; 
+}
+.desc p{
+  margin-top:0;
+}
+.clear{
+  clear:both;
+}
+a{
+  text-decoration: none;
+  color: Lime;
+}
+a.tooltip::before {
+  content: attr(data-tip)  attr(data-tip-temp) attr(data-tip-humi);
+  font-size: 10px;
+  position:absolute;
+  z-index: 999;
+  white-space:nowrap;
+  bottom:9999px;
+  left: 50%;
+  background:#000;
+  color:lime;
+  padding:0px 7px;
+  line-height: 24px;
+  height: auto;
+  display: block;
+  white-space: pre;	    
+  opacity: 0;
+  transition:opacity 0.4s ease-out;
+    }
+a.tooltip:hover::before {
+  opacity: 1;
+  bottom:-35px;
+    }
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+</style>
+</head>
+
+<body>
+
+    <table style="visibility:hidden" class="dataTable" id="example" >
+    <thead>
+        <tr><th>id</th><th>state</th><th>timestamp</th></tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+    <div class="slidecontainer">  <input type="range" min="1" max="100" value="50" class="slider" id="myRange"> </div>
+    <div id="megaDIV"></div>
+
+
+
+
+<script src="include/jquery-2.1.0.js"></script>
+<link rel="stylesheet" type="text/css" href="include/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="include/jquery.dataTables.js"></script>
+<script src="include/fnFindCellRowIndexes.js"></script>
+<script src="include/moment.min.js"></script>
+
+
+<script>
+	var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+$(document).ready(function() {
+let socket = new  WebSocket(`ws://159.122.187.64:32712`);
+
+    var dt1 = $('#example').DataTable({
+        paging: false,
+        searching: false,
+        lengthChange: false
+    });
+
+
+let vTop = 20; let vLeft = 10; let nHor = 0; 
+wW=Math.trunc((window.innerWidth/190)-1);
+
+socket.onmessage = function(event) {
+  let bombero;
+  let message = event.data;
+  let messageElem = document.createElement('div');
+  messageElem.textContent = message;
+  var obj = JSON.parse(message);
+  var rowId = $('#example').dataTable()
+   .fnFindCellRowIndexes(obj.values[0], 0);
+  var Diva = document.getElementById('megaDIV');
+  switch (obj.values[1]) {
+    case 'Verde':
+        colorin='green';
+	bombero='firemang';
+        break;
+    case 'Amarillo':
+        colorin='yellow';
+	bombero='firemany';
+        break;
+    case 'Rojo':
+        colorin='red';
+	bombero='firemanr';
+        break;
+  };
+  if (nHor > wW) {
+	vTop += 200;
+  	nHor = 0; vLeft = 10;
+  
+  }
+  if (rowId == '') {
+         addRow(obj.values[0], obj.values[1], Date(obj.values[2]), colorin);
+
+	 Diva.innerHTML += '<div id="imggame.'+obj.values[0]+'" style="padding:10px;margin-right:5px;width:150px;height:150px;position:absolute;top:'+vTop+'px;left:'+vLeft+'px;border:0px solid '+colorin+';z-index: 2"><div class="img-wrap" style="position:relative"></div><div class="desc"><a href="#" class="tooltip" data-tip="'+moment.unix(obj.values[2]).format('DD/MM/YY HH:mm:ss')+'" id=tip_'+ obj.values[0]+'><p>'+obj.values[0]+'</p></a></div><div class="clear"></div></div>'
+         dataDiv = document.getElementById('imggame.'+obj.values[0]);
+         dataDiv.style.backgroundRepeat = "no-repeat";
+         dataDiv.style.backgroundSize = "contain";
+         dataDiv.style.backgroundImage="url(img/"+bombero+".png)";
+
+  	 nHor++;
+	 vLeft += 190;
+  } else {
+	 dataDiv = document.getElementById('imggame.'+obj.values[0]);
+         updateRow(rowId, obj.values[1], Date(obj.values[2]), colorin);
+	 dataDiv.style.backgroundRepeat = "no-repeat";
+	 dataDiv.style.backgroundSize = "contain";
+	 dataDiv.style.border = "5px solid "+colorin;
+	 dataDiv.style.backgroundImage="url(img/"+bombero+".png)";
+
+	 dataLab = document.getElementById('tip_'+obj.values[0])
+         dataLab.setAttribute('data-tip', moment.unix(obj.values[2]).format('DD/MM/YY HH:mm:ss'));
+	 dataLab.setAttribute('data-tip-temp', '\nTemp:'+obj.values[3]);
+	 dataLab.setAttribute('data-tip-humi', '\nHumi:'+obj.values[4]);
+  }
+}
+
+    function addRow(id, estat, timest, col) {
+        var id = id;
+        var ts = estat;
+        var timest = timest;
+        var rowNode = dt1
+            .row.add([id, ts, timest])
+            .draw(false)
+            .node();
+        var rowId = $('#example').dataTable()
+            .fnFindCellRowIndexes(id, 0);
+        var cellNode = dt1.cell(rowId, 1)
+            .data(estat)
+            .draw(false)
+            .node();
+        $(cellNode)
+            .css({backgroundColor: col});
+
+    }
+
+    function updateRow(id, estat, timest, col) {
+        var rowNum = id;
+        var row = dt1.row(id);
+        var cellNode = dt1.cell(rowNum, 1) //estat
+            .data(estat)
+            .draw(false)
+            .node();
+        $(cellNode)
+            .css({backgroundColor: col});
+
+        var cellNode = dt1.cell(rowNum, 2) //timestamp
+            .data(timest)
+            .draw(false)
+            .node();
+         $(cellNode)
+            .css({backgroundColor: 'blue'})
+            .animate({backgroundColor: 'white'}, "slow");
+    }
+
+    function deleteRow() {
+        var row = dt1.row(randomRow());
+        var rowNode = row.node();
+        $(rowNode)
+            .css({backgroundColor: 'red'})
+            .animate({backgroundColor: 'black'}, 2500,
+                function() {row.remove().draw(false)});
+    }
+
+
+});
+    </script>
+                                      
+
+</body>
+</html>
+

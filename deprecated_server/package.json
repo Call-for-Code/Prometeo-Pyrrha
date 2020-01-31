@@ -1,0 +1,9 @@
+{
+  "name": "wsnode",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Basic websockets server and nginx",
+  "dependencies": {
+    "express": "4.x"
+  }
+}

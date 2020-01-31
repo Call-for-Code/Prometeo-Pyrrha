@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<section role="main" class="content-body">
+	<header class="page-header">
+	<h2>Dispositivos</h2>
+
+	<div class="right-wrapper pull-right">
+		<ol class="breadcrumbs">
+			<li>
+				<a href="index.html">
+					<i class="fa fa-home"></i>
+				</a>
+			</li>
+			<li><span>Administración</span></li>
+			<li><span>Dispositivos</span></li>
+		</ol>
+	</div>
+	</header>
+
+	<!-- start: page -->
+	<section class="panel">
+		<header class="panel-heading">
+			<div class="panel-actions">
+				<a href="#" class="fa fa-caret-down"></a>
+			</div>
+
+			<h2 class="panel-title">Dispositivos</h2>
+		</header>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="mb-md">
+						<button id="addToTable" class="btn btn-primary">Añadir <i class="fa fa-plus"></i></button>
+					</div>
+				</div>
+			</div>
+			<table class="table table-bordered table-striped mb-none" id="datatable-editable">
+				<thead>
+					<tr>
+						<th>Id Sensor</th>
+						<th>Modelo</th>
+						<th>Versión</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+						{% for record in dispositivos %}
+						<tr class="gradeA">
+							<td>{{ record[0] }}</td>
+							<td>{{ record[1] }}</td>
+							<td>{{ record[2] }}</td>
+							<td class="actions">
+								<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+								<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+								<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+							</td>
+						</tr>
+						{% endfor %}
+			</tbody>
+			</table>
+		</div>
+	</section>
+	<!-- end: page -->
+
+
+	</section>
+
+	<div id="dialog" class="modal-block mfp-hide">
+		<section class="panel">
+			<header class="panel-heading">
+				<h2 class="panel-title">¿Estás seguro?</h2>
+			</header>
+			<div class="panel-body">
+				<div class="modal-wrapper">
+					<div class="modal-text">
+						<p>¿Estás seguro de que quieres borrar esta fila?</p>
+					</div>
+				</div>
+			</div>
+			<footer class="panel-footer">
+				<div class="row">
+					<div class="col-md-12 text-right">
+						<button id="dialogConfirm" class="btn btn-primary">Confirmar</button>
+						<button id="dialogCancel" class="btn btn-default">Cancelar</button>
+					</div>
+				</div>
+			</footer>
+		</section>
+	</div>
+
+	<!-- Vendor -->
+	<script src="assets/vendor/jquery/jquery.js"></script>
+	<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+	<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+	<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+	<!-- Specific Page Vendor -->
+	<script src="assets/vendor/select2/select2.js"></script>
+	<script src="assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+	<script src="assets/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+	<!-- Theme Base, Components and Settings -->
+	<script src="assets/javascripts/theme.js"></script>
+
+	<!-- Theme Custom -->
+	<script src="assets/javascripts/theme.custom.js"></script>
+
+	<!-- Theme Initialization Files -->
+	<script src="assets/javascripts/theme.init.js"></script>
+
+
+	<!-- Examples -->
+ 	<script src="assets/javascripts/tables/examples.datatables.editable.js"></script>
+
+
+{% endblock %}

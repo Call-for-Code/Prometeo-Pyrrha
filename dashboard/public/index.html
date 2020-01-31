@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+				<section role="main" class="content-body">
+					<header class="page-header">
+						<h2>Dashboard</h2>
+
+						<div class="right-wrapper pull-right">
+							<ol class="breadcrumbs">
+								<li>
+									<a href="{{ url_for('index') }}">
+										<i class="fa fa-home"></i>
+									</a>
+								</li>
+								<li><span>Dashboard  </span></li>
+							</ol>
+						</div>
+					</header>
+
+					<iframe width="100%" height="500px" src="/dashboard/index_dashboard.html"></iframe>
+
+				</section>
+
+
+{% endblock %}

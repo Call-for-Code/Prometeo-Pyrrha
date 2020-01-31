@@ -1,0 +1,256 @@
+{% extends "/base.html" %}
+
+{% block content %}
+  <section role="main" class="content-body">
+    <header class="page-header">
+      <h2>Administración de Eventos</h2>
+
+      <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+          <li>
+            <a href="index.html">
+              <i class="fa fa-home"></i>
+            </a>
+          </li>
+          <li><span>Administración</span></li>
+          <li><span>Eventos</span></li>
+        </ol>
+      </div>
+    </header>
+
+		<section>
+			<form action="{{ url_for('admin_eventos_form') }}" method=post>
+
+				<section class="panel">
+					<div class="row">
+						<div class="col-md-3">
+							<div class="mb-md">
+								<input type="submit" value="Guardar" class="btn btn-primary">
+								<a href="{{ url_for('admin_eventos') }}" class="btn btn-secondary">Cancelar</a>
+							</div>
+						</div>
+				</section>
+
+		    <section class="panel">
+		      <header class="panel-heading">
+		        <div class="panel-actions">
+		          <a href="#" class="fa fa-caret-down"></a>
+		        </div>
+
+		        <h2 class="panel-title">Datos Básicos</h2>
+		      </header>
+
+		      <div class="panel-body">
+						<form class="form-horizontal form-bordered" method="get">
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="inputSuccess">Estado</label>
+								<div class="col-md-6">
+									<select class="form-control mb-md">
+										<option>Pdte inicio</option>
+										<option>En curso</option>
+										<option>Finalizado</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label">Cod Evento <span class="required">*</span></label>
+								<div class="col-md-6">
+									<input type="text" name="id_evento" value="{{ datos_evento[1] }}" class="form-control" title="Por favor, introduce el Id de Evento" placeholder="" required/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="inputSuccess">Tipo Evento</label>
+								<div class="col-md-6">
+									<select class="form-control mb-md">
+										<option>Quema Prescrita</option>
+										<option>Incendio Forestal</option>
+										<option>Otros</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="inputSuccess">Tipo Combustible</label>
+								<div class="col-md-6">
+									<select class="form-control mb-md">
+										<option>Pasto</option>
+										<option>Hojarasca</option>
+										<option>Ramas Caídas</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label">Fecha Evento</label>
+								<div class="col-md-6">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</span>
+										<input type="text" data-plugin-datepicker class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label">Hora inicio</label>
+								<div class="col-md-3">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-clock-o"></i>
+										</span>
+										<input type="text" data-plugin-timepicker class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label">Hora Fin</label>
+								<div class="col-md-3">
+									<div class="input-group">
+										<span class="input-group-addon">
+											<i class="fa fa-clock-o"></i>
+										</span>
+										<input type="text" data-plugin-timepicker class="form-control">
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="textareaAutosize">Extra Info:</label>
+								<div class="col-md-6">
+									<textarea class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize></textarea>
+								</div>
+							</div>
+
+
+						</form>
+					</div>
+
+		    </section>
+
+				<section class="panel">
+					<header class="panel-heading">
+						<div class="panel-actions">
+							<a href="#" class="fa fa-caret-down"></a>
+						</div>
+
+						<h2 class="panel-title">Bomberos, Roles y Dispositivos</h2>
+					</header>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="mb-md">
+									<button id="addToTable" class="btn btn-primary">Añadir <i class="fa fa-plus"></i></button>
+								</div>
+							</div>
+						</div>
+						<table class="table table-bordered table-striped mb-none" id="datatable-editable">
+							<thead>
+								<tr>
+									<th>Bombero</th>
+									<th>Rol</th>
+									<th>Dispositivo</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="gradeA">
+									<td>00001 - Pepe Gallego</td>
+									<td>Antorcha</td>
+									<td>00001</td>
+									<td class="actions">
+										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+										<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr class="gradeA">
+									<td>00002 - Antonio Pérez</td>
+									<td>Hacha</td>
+									<td>00002</td>
+									<td class="actions">
+										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+										<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr class="gradeA">
+									<td>00003 - Federico Ávila</td>
+									<td>Motosierra</td>
+									<td>00003</td>
+									<td class="actions">
+										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+										<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+
+
+				<section class="panel">
+					<header class="panel-heading">
+						<div class="panel-actions">
+							<a href="#" class="fa fa-caret-down"></a>
+						</div>
+
+						<h2 class="panel-title">Mapa</h2>
+					</header>
+
+					<div class="panel-body">
+						<div class="row">
+		          <div class="col-sm-6">
+								<input type="text" name="latitud" id="latitud" value="{{ datos_evento[9] }}" class="form-control" placeholder=""/>
+								<input type="text" name="longitud" id="longitud" value="{{ datos_evento[10] }}" class="form-control" placeholder=""/>
+								<button id="refreshMap" onClick="$('#iframeMap').attr('src','/mapa_evento?latitud=' + $('#latitud').val() + '&longitud=' + $('#longitud').val())" class="btn btn-primary">Visualizar</button>
+		          </div>
+		        </div>
+
+		  <!--				<iframe width="100%" height="500px" src="mapa_evento.html"></iframe> -->
+							<iframe id="iframeMap" width="100%" height="500px" src={{ url_for('mapa_evento', latitud=datos_evento[9], longitud=datos_evento[10]) }}></iframe>
+					</div>
+
+				</section>
+
+				</form>
+		  </section>
+		</section>
+
+		<!-- Vendor -->
+		<script src="assets/vendor/jquery/jquery.js"></script>
+		<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+
+		<!-- Specific Page Vendor -->
+		<script src="assets/vendor/select2/select2.js"></script>
+		<script src="assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
+		<script src="assets/vendor/jquery-datatables-bs3/assets/js/datatables.js"></script>
+
+		<!-- Theme Base, Components and Settings -->
+		<script src="assets/javascripts/theme.js"></script>
+
+		<!-- Theme Custom -->
+		<script src="assets/javascripts/theme.custom.js"></script>
+
+		<!-- Theme Initialization Files -->
+		<script src="assets/javascripts/theme.init.js"></script>
+
+		<!-- Examples -->
+	 	<script src="assets/javascripts/tables/examples.datatables.editable.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <title>Add Graphics to a SceneView - 4.14</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.14/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.14/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/GraphicsLayer",
+        "esri/Graphic"
+      ], function(Map, SceneView, GraphicsLayer, Graphic) {
+        var map = new Map({
+          basemap: "topo-vector",
+          ground: "world-elevation"
+        });
+
+        var view = new SceneView({
+          container: "viewDiv",
+          map: map,
+
+          camera: {
+            // autocasts as new Camera()
+            position: {
+              // autocasts as new Point()
+              x: {{ longitud }},
+              y: {{ latitud }} - 0.08,
+              z: 3500
+            },
+            heading: 0.34445102566290225,
+            tilt: 82.95536300536367
+          }
+        });
+
+        /*********************
+         * Add graphics layer
+         *********************/
+
+        var graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
+
+        /*************************
+         * Add a 3D point graphic
+         *************************/
+
+        // London
+        var point = {
+          type: "point", // autocasts as new Point()
+          x: {{ longitud }},
+          y: {{ latitud }},
+          z: 3010
+        };
+
+        markerSymbol = {
+          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+          color: [226, 10, 40],
+          outline: {
+            // autocasts as new SimpleLineSymbol()
+            color: [255, 255, 255],
+            width: 2
+          }
+        };
+
+        var pointGraphic = new Graphic({
+          geometry: point,
+          symbol: markerSymbol
+        });
+
+        graphicsLayer.add(pointGraphic);
+
+        /****************************
+         * Add a 3D polyline graphic
+         ****************************/
+
+        var polyline = {
+          type: "polyline", // autocasts as new Polyline()
+          paths: [
+            [{{ longitud }}, {{ latitud }}, 0],
+            [{{ longitud }}, {{ latitud }}, 3000]
+          ]
+        };
+
+        lineSymbol = {
+          type: "simple-line", // autocasts as SimpleLineSymbol()
+          color: [226, 10, 40],
+          width: 4
+        };
+
+        var polylineGraphic = new Graphic({
+          geometry: polyline,
+          symbol: lineSymbol
+        });
+
+        graphicsLayer.add(polylineGraphic);
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
