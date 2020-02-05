@@ -70,9 +70,9 @@ Wiring diagram:
 
 ## IBM IoT Platform
 
-This was very straight forward step, simply register the new devices and make sure they connect to the platform, also and thanks to the code uploaded to our microcontroller we're able to perform remote actions on our device, such as change the polling interval, restart the device or wipe it.
+This is very straight forward step, simply register the new devices and make sure they connect to the platform, also and thanks to the code uploaded to our microcontroller we're able to perform remote actions on our device, such as change the polling interval, restart the device, or wipe it.
 
-At last but not at least we created a connection between the IoT Platform and our next step, our NodeRed app.
+At last but not at least we create a connection between the IoT Platform and our next step, our Node-RED app.
 
 
 ## Node-RED
@@ -81,62 +81,62 @@ At last but not at least we created a connection between the IoT Platform and ou
 
 At this point, we can conclude that we're in front of our core service. With this app we control all the workflow of the metrics sent by our sensors, store them, analyze them and take actions depending on the readings.
 
-So, lets analyse node by node. Also, you can find [the code here](/nodered/node.yml), if you want to import to your personal project, just take into account that credentials, tokens and sensitive data are deleted.
+So, lets analyze node by node. Also, you can find [the code here](/nodered/node.yml), if you want to import to your personal project, just take into account that credentials, tokens and sensitive data are deleted.
 
-- get IAM Token: At this block, basically we generate every 15 minutes a request in order to have a valid token to authenitcate with the IAM service. We will use it in order to communicate with our Machine Learnin Webservice.
+- get IAM Token: At this block, basically we generate every 15 minutes a request in order to have a valid token to authenticate with the IAM service. We will use it in order to communicate with our machine learning service.
 
-- IBM IoT: It connects and receives the events from every device registered in our IoT Hub. The messages are received in json format.
+- IBM IoT: It connects and receives the events from every device registered in our IoT Hub. The messages are received in JSON format.
 	
-	Once the message is received we take two actions in parallel
-- nodemcu: With this node, we save a copy of the message in a cloudant database, with this we will have historical data for the future.
+	Once the message is received we take two actions in parallel:
+- nodemcu: With this node, we save a copy of the message in a Cloudant database, with this we will have historical data for the future.
 - IoT2ML: At this function node, we only transform the message received in order to make it comprehensive by our machine learning service.
 	
-- Machine Learning Firefighter Health Prediction: in the Watson Machine Learning is where the "magic" happens, thanks to our predictive model, once we send the metrics, our model will reply with a Green, yellow or red firefighter status. We will go deeper on our explanation on the Watson Machine Learning section below.
+- Machine Learning Firefighter Health Prediction: in the Watson Machine Learning is where the "magic" happens, thanks to our predictive model, once we send the metrics, our model will reply with a green, yellow or red firefighter status. We will go deeper on our explanation on the Watson machine learning section below.
 
 - ML2status2.0: At this point, we finally prepare the message in order to be sent to our live dashboard. Basically we send the following paylod, "Firefighter ID", "Status", "Timestamp of the event", "Temperature", "Humidity", "Smoke concentration"
 
-- Webscokets Server: This is the end node, which sends the messages to our websockets send and receive server, later we will talk more in detail.
+- Websockets Server: This is the end node, which sends the messages to our websockets send and receive server, later we will describe it more in detail.
 
 
 ## IBM Cloud Kubernetes Service
 
-At this point, we need somewhere to publish our real time dashboard. We created a service at the IBM Cloud Container Service. This service includes a web-sockets receiver and sender and a NGINX serving our portal written basically with javascript and using datatables library based on jquery.
+At this point, we need somewhere to publish our real-time dashboard. We created a service at the IBM Cloud Container Service. This service includes a websockets receiver and sender and a NGINX hosting our portal written basically with Javascript and using datatables library based on jQuery.
 
-This service has exposed two ports, one for the web-sockets server and the other for the nginx server.
+This service has exposed two ports, one for the websockets server and the other for the NGINX server.
 
-[Inside this folder](/dashboard/server), you can find the code of the websockets server `server.js`, the source for the portal `html/index.html` and also the script we use to deploy and update the code on our POD `deploy.sh`.
+[Inside this folder](/dashboard/server), you can find the code of the websockets server `server.js`, the source for the portal `html/index.html` and also the script we use to deploy and update the code on our pod `deploy.sh`.
 
 ## Dashboard
 
-Finally, the client is just a web browser that supports javascript and web-sockets that is support by almos all new browsers.
+Finally, the client is just a web browser that supports JavaScript and websockets that is support by almost all recent browsers.
 
 ![alt text](/screenshots/portal.png)
 
 ## Watson Machine Learning
 
-As part of the Prometeo Solution, is used machine learning in order to determine if it is risky to maintain the firefighter in the actual area puting out the fire or if it is necessary to move him away.
+Prometeo solution uses machine learning in order to determine the level of risk to keep the firefighter in the area putting out the fire or if it is imperative to move him away.
 
 We didn't have real data for training the model, so we decided to emulate data creating an ad hoc dataset.
 
 First, we used the dataset to train the model.
 
-After training the model, we created a web service in order to use the model in the Node/Red module explained before.
+After training the model, we created a web service in order to use the model in the Node/Red module explained above.
 
 ## Training the model
 
-We used the dataset dataset_cut.csv [the code here](/content/dataset_cut.csv) that contains the next variables:
+We used the dataset [`dataset_cut.csv`](/content/dataset_cut.csv) that contains the next variables:
 
-- Temperature: exterior temperature
-- Humidity: Relative humidity in %
-- PPM: Smoke concentration referred to parts of million of CO
-- Status: indicates if the actual observation is red (meaning it's dangerous for the firefigheter), yellow (it's a warning), green (there's no risk). This is the variable we have to predict
+- Temperature: Exterior temperature
+- Humidity: Relative humidity percentage
+- PPM: Smoke concentration referred to parts of million of carbon monoxide (CO)
+- Status: Indicates if the actual observation is red (meaning it's dangerous for the firefighter), yellow (it's a warning), green (there's low risk). This is the variable we have to predict.
 
 The machine model we'll be trained with this information.
 
 Before starting the training, it's necessary to process the dataset.
 
-Once the dataset is uploaded in the watson studio project, refine the dataset with the next actions:
-- Convert temperature, humidity and ppm into integer
+Once the dataset is uploaded in the Watson Studio project, refine the dataset with the next actions:
+- Convert temperature, humidity, and PPM into integers
 - Execute the job creating a new version of the dataset
 
 After that, create a new machine learning model:
@@ -166,4 +166,5 @@ In our case, we created the deployment "Prometeo ML Webservice".
 ![alt text](/screenshots/Model_deployment.png)
 
 ## Graphical explantation of our model
+
 ![alt text](/screenshots/datascience.png)

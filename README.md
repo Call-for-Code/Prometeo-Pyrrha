@@ -1,6 +1,6 @@
 # ![Prometeo](/screenshots/prometeo.png?raw=true)
 
-In the face of natural disasters, such as wildfires, Prometeo protects those who protect us - the firefighters. With our solution, we've developed a prototype sensor which sends basic telemetry (temperature, humidity, and smoke concentration). This data is processed by a machine learning algorithm which is able to predict firefighter health, indicating if they are OK, soon to be in danger, or in danger.
+In the face of natural disasters, such as wildfires, Prometeo protects those who protect us - the firefighters. With our solution, we've developed a prototype sensor which sends environmental telemetry (temperature, humidity, and smoke concentration). This data is processed by a machine learning algorithm which is able to predict firefighter health, indicating if they are OK, soon to be in danger, or in danger. The goal is to track real-time status, and eventually use aggregated data to make suggestions that improve health outcomes in the long run.
 
 View the [project board to track progress against the 1Q 2020 milestones](https://github.com/Code-and-Response/Prometeo/projects/1).
 
@@ -34,6 +34,7 @@ Watch the video below to understand Prometeo's solution:
 [![](http://img.youtube.com/vi/vOgCOoy_Bx0/0.jpg)](http://www.youtube.com/watch?v=vOgCOoy_Bx0)
 
 ## Setting up the solution
+
 See [SETUP.md](SETUP.md)
 
 ## Project roadmap
@@ -63,11 +64,11 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 This project is licensed under the Apache 2 License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-* Juanma García Escobar ( www.juanma.es) for his original drawings and animations
+* Juanma García Escobar (www.juanma.es) for his original drawings and animations
 * Artur Alvarez Herrera (www.artvr.tv) for his video production
-* Michael Martinez  (michael.martineztx@gmail.com) for his speaking with american accent for the video
+* Michael Martinez (michael.martineztx@gmail.com) for his speaking with American accent for the video
 * Wildland Firefighters GRAF for their labor against wildfires in Catalonia and their inspiring message
-* GRAF: Grups de Reforç d'Actuacions Forestals. Bombers. Departament Interior de la Generalitat de Catalunya. This technical support team is part of the local emergency services.  GRAF is specialized in fire extinction strategies.
+* GRAF: Grups de Reforç d'Actuacions Forestals. Bombers. Departament Interior de la Generalitat de Catalunya. This technical support team is part of the local emergency services. GRAF is specialized in fire extinction strategies.
 
 * GEM: Grup d'Emergències Mèdiques dels Bombers de la Generalitat.
 * Based on [Billie Thompson's README template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2).
