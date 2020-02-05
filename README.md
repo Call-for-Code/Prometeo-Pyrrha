@@ -9,11 +9,11 @@ View the [project board to track progress against the 1Q 2020 milestones](https:
 ## The solution at a glance
 
 Prometeo is comprised of 5 different components:
-1. The sensor
-2. IBM IoT Platform
-3. Node-RED
-4. IBM Cloud Kubernetes Service
-5. Dashboard
+1. [The sensor](SETUP.md#the-sensor)
+2. [IBM IoT Platform](SETUP.md#ibm-iot-platform)
+3. [Node-RED](SETUP.md#node-red)
+4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
+5. [Dashboard](SETUP.md#dashboard)
 
 ![alt text](https://github.com/joraco-dev/prometeo/blob/master/content/Presentation2.png)
 
