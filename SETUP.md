@@ -75,7 +75,7 @@ This was very straight forward step, simply register the new devices and make su
 At last but not at least we created a connection between the IoT Platform and our next step, our NodeRed app.
 
 
-## NodeRed
+## Node-RED
 
 ![alt text](/screenshots/nodered2.png)
 
@@ -106,7 +106,7 @@ This service has exposed two ports, one for the web-sockets server and the other
 
 [Inside this folder](/dashboard/server), you can find the code of the websockets server `server.js`, the source for the portal `html/index.html` and also the script we use to deploy and update the code on our POD `deploy.sh`.
 
-## Client
+## Dashboard
 
 Finally, the client is just a web browser that supports javascript and web-sockets that is support by almos all new browsers.
 
