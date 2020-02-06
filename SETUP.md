@@ -165,6 +165,6 @@ In our case, we created the deployment "Prometeo ML Webservice".
 
 ![alt text](/screenshots/Model_deployment.png)
 
-## Graphical explantation of our model
+## Graphical explanation of our model
 
 ![alt text](/screenshots/datascience.png)
