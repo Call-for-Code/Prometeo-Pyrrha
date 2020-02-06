@@ -2,15 +2,15 @@
 
 ## Pre-requisites
 
-This project, at least the part of the board, has been developed with Arudino, so you will need the IDE if you want to use our example, you can get it here (https://www.arduino.cc/en/main/software).
+This project, at least the hardware portion, has been developed with Arduino, so you will need the IDE if you want to use our example, you can get it here (https://www.arduino.cc/en/main/software).
 
-Once it’s installed the Arudino IDE, you should install third party libraries for the ESP32 board (the one that we use).
+Once the Arudino IDE is installed, you should install third party libraries for the ESP32 board (the specific one that we use).
 
 In order to do that, you should add this repository as follows. Go to preferences, then add on the field “Additional Boards Manager URLs” this URL `https://dl.espressif.com/dl/package_esp32_index.json`, if you already have some other repositories, separate them with a comma.
 
-Next thing to do, is add our board. We need to click on Tools Menu, then on Board section, click on “Boards Manager”. We will search `esp32` and install the board called “esp32 by Espressif Systems” (at the moment of writing this manual, the selected version is 1.0.4).
+Next thing to do is add our board to the IDE. We need to click on Tools Menu, then on Board section, click on “Boards Manager”. We will search `esp32` and install the board called “esp32 by Espressif Systems” (at the moment of writing this manual, the selected version is 1.0.4).
 
-The last thing before getting to the real work is install the libraries used by our project, we use libraries for the temperature sensor, for forming a JSON in order to send the data to the IBM IoT Cloud, we will need to install the following libraries.
+The last thing before getting to the real work is install the libraries used by our project. These include code for the temperature sensor and for forming a JSON document in order to send the data to the IBM Watson IoT Cloud.
 
 We go to Sketch menu, then we will select “Include library” and finally “Manage Libraries”, then we will search and install the following libraries
 
@@ -18,23 +18,23 @@ We go to Sketch menu, then we will select “Include library” and finally “M
 - DHT sensor library by Adafruit 1.3.4
 - EspMQTTClient by Patrick Lapointe 1.5.0
 
-Once all this pre-requisites are met, you can start compiling the code
+Once all these pre-requisites are met, you can start compiling the code.
 
 ## The Sensor
 
-For this part of the project, we used a board based on the ESP32 micro-controller with NodeMCU firmware, as this project will be open source. To this controller, we attached a couple of sensors, the DHT11 which give us information about Temperature and Humidity and the MQ-7 sensor which give us, among the concentration of several gases, the concentration of smoke.
+For this part of the project, we used a board based on the ESP32 micro-controller with NodeMCU firmware, as this project will be open source. To this controller, we attached a couple of sensors, the DHT11 which gives us information about Temperature and Humidity and the MQ-7 sensor which gives us, among the concentration of several gases, the concentration of smoke and carbon monoxide.
 
-In order to do it portable, we decided to power the controller with a portable usb battery and wrap-it with a sports arm band.
+In order for it to be wireless, we decided to power the controller with a portable USB battery and wrap it with a sports arm band.
 
-The following image is the final result with a firefighter wearing it.
+The following image is the final result of the initial prototype with a firefighter wearing it.
 
 ![alt text](/screenshots/sensor.png)
 
-Finally, the code that makes possible to read those metrics and send it to the next stage (IBM IoT Platform) [could be reviewed here](/sensor/sensor.c). There are some things to have in mind reading this code:
+Finally, the code that makes it possible to read those metrics and send them to the server (IBM IoT Platform) [can be reviewed here](/sensor/esp32_bombers_mq7/esp32_bombers_mq7.ino). There are some things to keep in mind reading this code:
 	
-- The connectivity to the internet is intended to do it with tethering with a mobile phone, so you need to supply SSID and password of the wifi-hotspot.
-- You need to take into consideration that the pins will vary if you decide to us another board or type of sensors, in our case for the Temperature and Humidity we use de the digital pin 27 and for the smoke sensor we used the analog pin 32.
-- You will need a valid token for the IoT Platform and register your device in the Hub
+- The connectivity to the internet is provided by tethering with a mobile phone, so you need to supply SSID and password of the WiFi-hotspot.
+- You need to take into consideration that the pins will vary if you decide to us another board or type of sensor, in our case for the Temperature and Humidity we use de the digital pin 27 and for the smoke sensor we used the analog pin 32.
+- You will need a valid token for the IoT Platform and to register your device in the Hub.
 - We based our code on the example provided on the IBM Developer portal written by Ant Elder (https://developer.ibm.com/recipes/tutorials/run-an-esp8266arduino-as-a-iot-foundation-managed-device/)
 
 Wiring diagram:
@@ -70,7 +70,7 @@ Wiring diagram:
 
 ## IBM IoT Platform
 
-This is very straight forward step, simply register the new devices and make sure they connect to the platform, also and thanks to the code uploaded to our microcontroller we're able to perform remote actions on our device, such as change the polling interval, restart the device, or wipe it.
+This is a very straight forward step, simply register the new devices and make sure they connect to the platform, also and thanks to the code uploaded to our microcontroller we're able to perform remote actions on our device, such as change the polling interval, restart the device, or wipe it.
 
 At last but not at least we create a connection between the IoT Platform and our next step, our Node-RED app.
 

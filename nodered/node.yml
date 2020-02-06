@@ -51,7 +51,7 @@
         "id": "628a7a56.ba5cc4",
         "type": "websocket out",
         "z": "362d78fe.abd978",
-        "name": "Webscokets Server",
+        "name": "Websockets Server",
         "server": "",
         "client": "8caef996.b96cb8",
         "x": 690,
