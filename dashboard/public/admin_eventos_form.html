@@ -8,7 +8,7 @@
       <div class="right-wrapper pull-right">
         <ol class="breadcrumbs">
           <li>
-            <a href="index.html">
+            <a href="{{ url_for('index') }}">
               <i class="fa fa-home"></i>
             </a>
           </li>
@@ -46,9 +46,9 @@
 								<label class="col-md-3 control-label" for="inputSuccess">Estado</label>
 								<div class="col-md-6">
 									<select class="form-control mb-md">
-										<option>Pdte inicio</option>
-										<option>En curso</option>
-										<option>Finalizado</option>
+										{% for record_status in all_status %}
+											<option {% if datos_evento[2] == record_status[0] %} selected{% endif %}>{{ record_status[1] }}</option>
+										{% endfor %}
 									</select>
 								</div>
 							</div>
@@ -64,9 +64,9 @@
 								<label class="col-md-3 control-label" for="inputSuccess">Tipo Evento</label>
 								<div class="col-md-6">
 									<select class="form-control mb-md">
-										<option>Quema Prescrita</option>
-										<option>Incendio Forestal</option>
-										<option>Otros</option>
+										{% for record_event_type in all_event_types %}
+											<option {% if datos_evento[3] == record_event_type[0] %} selected{% endif %}>{{ record_event_type[1] }}</option>
+										{% endfor %}
 									</select>
 								</div>
 							</div>
@@ -75,9 +75,9 @@
 								<label class="col-md-3 control-label" for="inputSuccess">Tipo Combustible</label>
 								<div class="col-md-6">
 									<select class="form-control mb-md">
-										<option>Pasto</option>
-										<option>Hojarasca</option>
-										<option>Ramas Caídas</option>
+										{% for record_fuel_type in all_fueltypes %}
+											<option {% if datos_evento[4] == record_fuel_type[0] %} selected{% endif %}>{{ record_fuel_type[1] }}</option>
+										{% endfor %}
 									</select>
 								</div>
 							</div>
@@ -89,7 +89,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</span>
-										<input type="text" data-plugin-datepicker class="form-control">
+										<input type="text" data-plugin-datepicker class="form-control" value="{{ datos_evento[5] }}">
 									</div>
 								</div>
 							</div>
@@ -101,7 +101,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-clock-o"></i>
 										</span>
-										<input type="text" data-plugin-timepicker class="form-control">
+										<input type="text" data-plugin-timepicker class="form-control" value="{{ datos_evento[6] }}">
 									</div>
 								</div>
 							</div>
@@ -113,7 +113,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-clock-o"></i>
 										</span>
-										<input type="text" data-plugin-timepicker class="form-control">
+										<input type="text" data-plugin-timepicker class="form-control" value="{{ datos_evento[7] }}">
 									</div>
 								</div>
 							</div>
@@ -121,7 +121,7 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="textareaAutosize">Extra Info:</label>
 								<div class="col-md-6">
-									<textarea class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize></textarea>
+									<textarea class="form-control" rows="3" id="textareaAutosize" data-plugin-textarea-autosize>{{ datos_evento[8] }}</textarea>
 								</div>
 							</div>
 
@@ -137,7 +137,7 @@
 							<a href="#" class="fa fa-caret-down"></a>
 						</div>
 
-						<h2 class="panel-title">Bomberos, Roles y Dispositivos</h2>
+						<h2 class="panel-title">Bomberos y Dispositivos</h2>
 					</header>
 					<div class="panel-body">
 						<div class="row">
@@ -151,16 +151,15 @@
 							<thead>
 								<tr>
 									<th>Bombero</th>
-									<th>Rol</th>
 									<th>Dispositivo</th>
 									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
+								{% for record in firefighters_devices %}
 								<tr class="gradeA">
-									<td>00001 - Pepe Gallego</td>
-									<td>Antorcha</td>
-									<td>00001</td>
+									<td>{{ record[1] }}</td>
+									<td>{{ record[3] }}</td>
 									<td class="actions">
 										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
 										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
@@ -168,28 +167,7 @@
 										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
 									</td>
 								</tr>
-								<tr class="gradeA">
-									<td>00002 - Antonio Pérez</td>
-									<td>Hacha</td>
-									<td>00002</td>
-									<td class="actions">
-										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-										<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr class="gradeA">
-									<td>00003 - Federico Ávila</td>
-									<td>Motosierra</td>
-									<td>00003</td>
-									<td class="actions">
-										<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
-										<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-										<a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-										<a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
+								{% endfor %}
 							</tbody>
 						</table>
 					</div>
@@ -206,17 +184,28 @@
 						<h2 class="panel-title">Mapa</h2>
 					</header>
 
-					<div class="panel-body">
-						<div class="row">
-		          <div class="col-sm-6">
-								<input type="text" name="latitud" id="latitud" value="{{ datos_evento[9] }}" class="form-control" placeholder=""/>
-								<input type="text" name="longitud" id="longitud" value="{{ datos_evento[10] }}" class="form-control" placeholder=""/>
-								<button id="refreshMap" onClick="$('#iframeMap').attr('src','/mapa_evento?latitud=' + $('#latitud').val() + '&longitud=' + $('#longitud').val())" class="btn btn-primary">Visualizar</button>
-		          </div>
-		        </div>
 
-		  <!--				<iframe width="100%" height="500px" src="mapa_evento.html"></iframe> -->
-							<iframe id="iframeMap" width="100%" height="500px" src={{ url_for('mapa_evento', latitud=datos_evento[9], longitud=datos_evento[10]) }}></iframe>
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Latitud</label>
+							<div class="col-md-6">
+								<input type="text" name="latitud" id="latitud" value="{{ datos_evento[9] }}" class="form-control" placeholder=""/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">Longitud</label>
+							<div class="col-md-6">
+								<input type="text" name="longitud" id="longitud" value="{{ datos_evento[10] }}" class="form-control" placeholder=""/>
+							</div>
+						</div>
+
+						<div class="form-group">
+								<button id="refreshMap" onClick="$('#iframeMap').attr('src','/mapa_evento?latitud=' + $('#latitud').val() + '&longitud=' + $('#longitud').val())" class="btn btn-primary">Visualizar</button>
+		        </div>
+						<div class="form-group">
+							<iframe id="iframeMap" frameborder="0" width="100%" height="500px" src={{ url_for('mapa_evento', latitud=datos_evento[9], longitud=datos_evento[10]) }}></iframe>
+						</div>
 					</div>
 
 				</section>
@@ -250,7 +239,7 @@
 		<script src="assets/javascripts/theme.init.js"></script>
 
 		<!-- Examples -->
-	 	<script src="assets/javascripts/tables/examples.datatables.editable.js"></script>
+	 	<script src="assets/javascripts/tables/examples.datatables.editable.bombero_dispositivo.js"></script>
 
 
 {% endblock %}

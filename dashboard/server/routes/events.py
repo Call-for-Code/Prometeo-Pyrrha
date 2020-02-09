@@ -106,3 +106,35 @@ class event(object):
         finally:
             cursor.close()
             con.close()
+
+    def get_event_firefighters_devices(self, eventid):
+        try:
+            con = mysql.connector.connect(**config)
+            cursor = con.cursor()
+            print("get_event")
+            print(eventid)
+
+            cursor.callproc('sp_select_event_firefighters_devices', (eventid,))
+
+            print("get_event_firefighters_devices - he abierto el cursor")
+
+            for result in cursor.stored_results():
+                data = result.fetchall()
+
+
+            if len(data) > 0:
+                print("get_event_firefighters_devices - hay datos")
+                for i in data:
+                    print(i)
+                return(data)
+            else:
+                print("get_event_firefighters_devices - no hay datos")
+                return None
+
+        except Exception as e:
+            print("get_event_firefighters_devices - estoy en la excepcion")
+            return None
+
+        finally:
+            cursor.close()
+            con.close()

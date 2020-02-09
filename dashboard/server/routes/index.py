@@ -63,7 +63,9 @@ def admin_eventos_form():
     eventid = request.args.get('eventid')
     obj_evento = event()
     datos_evento = obj_evento.get_event(eventid)
-    return render_template('admin_eventos_form.html', datos_evento=datos_evento)
+    event_firefighters_devices = obj_evento.get_event_firefighters_devices(eventid)
+
+    return render_template('admin_eventos_form.html', datos_evento=datos_evento, firefighters_devices=event_firefighters_devices, all_status=all_status, all_fueltypes=all_fueltypes, all_event_types=all_event_types)
 
 @app.route('/misalud_estado')
 def misalud_estado():
@@ -78,10 +80,6 @@ def mapa_evento():
     latitud = request.args.get('latitud')
     longitud = request.args.get('longitud')
     return render_template('/mapa_evento.html', longitud=longitud, latitud=latitud)
-
-@app.route('/admin_metricas_roles')
-def admin_metricas_roles():
-    return render_template('/admin_metricas_roles.html')
 
 @app.route('/testdb')
 def testdb():

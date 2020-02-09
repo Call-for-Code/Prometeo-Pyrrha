@@ -8,7 +8,7 @@
       <div class="right-wrapper pull-right">
         <ol class="breadcrumbs">
           <li>
-            <a href="index.html">
+            <a href="{{ url_for('index') }}">
               <i class="fa fa-home"></i>
             </a>
           </li>
@@ -52,9 +52,9 @@
 						<tr class="gradeA">
 							<td>{{ record[0] }}</td>
 							<td>{{ record[1] }}</td>
+							<td>{{ record[5] }}</td>
+							<td>{{ record[14] }}</td>
 							<td>{{ record[3] }}</td>
-							<td>{{ record[11] }}</td>
-							<td>{{ record[2] }}</td>
 							<td class="actions">
 								<a href="{{ url_for('admin_eventos_form', eventid=record[0]) }}"><i class="fa fa-pencil"></i></a>
 								<a href="#"><i class="fa fa-trash-o"></i></a>

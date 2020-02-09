@@ -9,7 +9,7 @@
 	<div class="right-wrapper pull-right">
 		<ol class="breadcrumbs">
 			<li>
-				<a href="index.html">
+				<a href="{{ url_for('index') }}">
 					<i class="fa fa-home"></i>
 				</a>
 			</li>
@@ -48,9 +48,9 @@
 				<tbody>
 						{% for record in dispositivos %}
 						<tr class="gradeA">
-							<td>{{ record[0] }}</td>
 							<td>{{ record[1] }}</td>
 							<td>{{ record[2] }}</td>
+							<td>{{ record[3] }}</td>
 							<td class="actions">
 								<a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
 								<a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
@@ -117,7 +117,7 @@
 
 
 	<!-- Examples -->
- 	<script src="assets/javascripts/tables/examples.datatables.editable.js"></script>
+ 	<script src="assets/javascripts/tables/examples.datatables.editable.dispositivo.js"></script>
 
 
 {% endblock %}
