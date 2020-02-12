@@ -4,7 +4,7 @@
 #include <DHT.h>
 #include <time.h>
 #include "MQ7.h" //https://github.com/swatish17/MQ7-Library
-#include "esp_sleep.h" 
+#include "esp_sleep.h" // IOS Devices are not compatible with deep sleep
 #include "config.h" //this file MUST be at the same folder as the .ino file
 
 // --- Define subscription model. No need to modify
@@ -78,7 +78,7 @@ void loop() {
    delay(5000); //giving time to send the whole request
    Serial.println( "Going for a siesta!" );
    esp_deep_sleep_start(); //We will activate deep sleep mode, and it will remain sleeping the number of seconds that we set up at esp_sleep_enable_timer_wakeup function.
-
+                           // Comment esp_deep_sleep_start(); to use with IOS Devices
 }
 
 void wifiConnect() {
