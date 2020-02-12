@@ -1,4 +1,4 @@
-import requests
+#import requests
 import json
 import mysql.connector
 from .configbdd import config
@@ -81,7 +81,7 @@ class event(object):
             con.close()
 
     def get_allevents(self):
-        print("get_allevents - entro en la función")
+        print("get_allevents - entro en la funcion")
 
         try:
             con = mysql.connector.connect(**config)
@@ -100,7 +100,7 @@ class event(object):
                 print("get_allevents - NO HAY INFORMACION")
                 return None
         except Exception as e:
-            print("get_allevents - Estoy en la excepción")
+            print("get_allevents - Estoy en la excepcion")
             return None
 
         finally:

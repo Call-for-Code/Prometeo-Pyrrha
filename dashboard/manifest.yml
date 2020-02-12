@@ -1,0 +1,11 @@
+applications:
+- buildpack: python_buildpack
+  command: python manage.py start 0.0.0.0:$PORT
+  domain: eu-gb.mybluemix.net
+  host: prometeo
+  instances: 1
+  memory: 128M
+  name: Prometeo
+  timeout: 180
+domain: eu-gb.mybluemix.net
+host: prometeo

@@ -1,6 +1,7 @@
 {% extends "/base.html" %}
 
 {% block content %}
+
   <section role="main" class="content-body">
     <header class="page-header">
       <h2>Administración de Eventos</h2>
@@ -58,6 +59,7 @@
 							<td class="actions">
 								<a href="{{ url_for('admin_eventos_form', eventid=record[0]) }}"><i class="fa fa-pencil"></i></a>
 								<a href="#"><i class="fa fa-trash-o"></i></a>
+								<a href="{{ url_for('report_mediciones', eventid=record[0]) }}"><i class="fa  fa-bar-chart-o"></i></a>
 							</td>
 						</tr>
 

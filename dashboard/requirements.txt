@@ -3,3 +3,5 @@ gunicorn==19.7.1
 prometheus-client
 ibmcloudenv
 livereload
+mysql-connector-python==8.0.12
+flask_wtf

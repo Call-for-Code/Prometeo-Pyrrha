@@ -136,7 +136,7 @@ socket.onmessage = function(event) {
   if (rowId == '') {
          addRow(obj.values[0], obj.values[1], Date(obj.values[2]), colorin);
 //	 Diva.innerHTML += '<div id="imggame.'+obj.values[0]+'" style="padding:10px;margin-right:5px;width:100px;height:100px;position:absolute;top:'+vTop+'px;left:'+vLeft+'px;border:0px solid ;z-index: 2"><div class="img-wrap" style="position:relative"></div><div class="desc"><a href="#" class="tooltip" data-tip="'+moment.unix(obj.values[2]).format('DD/MM/YY HH:mm:ss')+'" id=tip_'+ obj.values[0]+'><p>'+obj.values[0]+'</p></a></div><div class="clear"></div></div>'
-	 Diva.innerHTML += '<div id="imggame.'+obj.values[0]+'" style="padding:10px;margin:30px;width:100px;height:100px;position:relative;float:left;border:0px solid ;z-index: 2"><div class="img-wrap" style="position:relative"></div><div class="desc"><a href="#" class="tooltip" data-tip="'+moment.unix(obj.values[2]).format('DD/MM/YY HH:mm:ss')+'" id=tip_'+ obj.values[0]+'><p>'+obj.values[0]+'</p></a></div><div class="clear"></div></div>'
+	 Diva.innerHTML += '<div id="imggame.'+obj.values[0]+'" style="padding:10px;margin:30px;width:100px;height:100px;position:relative;float:left;border:0px solid ;z-index: 2"><div class="img-wrap" style="position:relative"></div><div class="desc"><a href="#" class="tooltip" data-tip="'+moment.unix(obj.values[2]).format('DD/MM/YY HH:mm:ss')+'" id=tip_'+ obj.values[0]+'><p style="margin-left: 30px">'+obj.values[0]+'</p></a></div><div class="clear"></div></div>'
          dataDiv = document.getElementById('imggame.'+obj.values[0]);
          dataDiv.style.backgroundRepeat = "no-repeat";
          dataDiv.style.backgroundSize = "contain";

@@ -47,7 +47,7 @@
               // autocasts as new Point()
               x: {{ longitud }},
               y: {{ latitud }} - 0.08,
-              z: 3500
+              z: 1500
             },
             heading: 0.34445102566290225,
             tilt: 82.95536300536367
@@ -65,12 +65,12 @@
          * Add a 3D point graphic
          *************************/
 
-        // London
+        // Point
         var point = {
           type: "point", // autocasts as new Point()
           x: {{ longitud }},
           y: {{ latitud }},
-          z: 3010
+          z: 1010
         };
 
         markerSymbol = {
@@ -98,7 +98,7 @@
           type: "polyline", // autocasts as new Polyline()
           paths: [
             [{{ longitud }}, {{ latitud }}, 0],
-            [{{ longitud }}, {{ latitud }}, 3000]
+            [{{ longitud }}, {{ latitud }}, 1000]
           ]
         };
 

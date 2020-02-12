@@ -10,6 +10,7 @@ from .configbdd import config
 from .fuel_types import fuelTypes
 from .status import status
 from .event_types import eventTypes
+from .metrics import metrics
 
 # create logger with 'prometeo'
 logger = logging.getLogger('prometeo')
@@ -74,6 +75,72 @@ def misalud_estado():
 @app.route('/misalud_informe')
 def misalud_informe():
     return render_template('/misalud_informe.html')
+
+@app.route('/report_mediciones')
+def report_mediciones():
+    max_mediciones = 5
+    evento = event()
+    eventid = request.args.get('eventid')
+#    eventid = 1
+    obj_evento = event()
+    datos_evento = obj_evento.get_event(eventid)
+    bomberos_dispositivos = obj_evento.get_event_firefighters_devices(eventid)
+    metricas = metrics()
+    metricas_bomberos = []
+    longitudes = []
+    for record_bd in bomberos_dispositivos:
+        metricas_dispositivo = metricas.get_allmetrics(record_bd[3], datos_evento[5], max_mediciones)
+        longitudes.append(len(metricas_dispositivo))
+        metricas_bomberos.append(metricas_dispositivo)
+    return render_template('/report_mediciones.html', bomberos_dispositivos=bomberos_dispositivos, longitudes=longitudes, metricas_bomberos=metricas_bomberos)
+
+
+@app.route('/report_mediciones_new')
+def report_mediciones_new():
+    max_mediciones = 20
+    evento = event()
+#    eventid = request.args.get('eventid')
+    eventid = 2
+    obj_evento = event()
+    datos_evento = obj_evento.get_event(eventid)
+    bomberos_dispositivos = obj_evento.get_event_firefighters_devices(eventid)
+    metricas = metrics()
+
+    d=[]
+    l = []
+    d1 = metricas.get_allmetrics("0001", datos_evento[5], max_mediciones)
+    d2 = metricas.get_allmetrics("0002", datos_evento[5], max_mediciones)
+    d3 = metricas.get_allmetrics("0003", datos_evento[5], max_mediciones)
+#    d4 = metricas.get_allmetrics("0004", datos_evento[5], max_mediciones)
+#    d5 = metricas.get_allmetrics("0005", datos_evento[5], max_mediciones)
+    d.append(d1)
+    d.append(d2)
+    d.append(d3)
+#    d.append(d4)
+#    d.append(d5)
+#    d6 = metricas.get_allmetrics("0006", datos_evento[5], max_mediciones)
+#    d7 = metricas.get_allmetrics("0007", datos_evento[5], max_mediciones)
+#    d8 = metricas.get_allmetrics("0008", datos_evento[5], max_mediciones)
+#    d9 = metricas.get_allmetrics("0009", datos_evento[5], max_mediciones)
+#    d10 = metricas.get_allmetrics("0010", datos_evento[5], max_mediciones)
+    l1 = len(d1)
+    l2 = len(d2)
+    l3 = len(d3)
+#    l4 = len(d4)
+#    l5 = len(d5)
+    l.append(l1)
+    l.append(l2)
+    l.append(l3)
+#    l.append(l4)
+#    l.append(l5)
+#    l6 = len(d6)
+#    l7 = len(d7)
+#    l8 = len(d8)
+#    l9 = len(d9)
+#    l10 = len(d10)
+
+    return render_template('/report_mediciones_new.html', d=d, l=l)
+
 
 @app.route('/mapa_evento')
 def mapa_evento():

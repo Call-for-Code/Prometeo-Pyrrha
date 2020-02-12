@@ -1,4 +1,4 @@
-import requests
+#import requests
 import json
 import mysql.connector
 from .configbdd import config
@@ -75,7 +75,7 @@ class devices(object):
             con.close()
 
     def get_alldevices(self):
-        print("get_alldevices - entro en la función")
+        print("get_alldevices - entro en la funcion")
 
         try:
             con = mysql.connector.connect(**config)
@@ -94,7 +94,7 @@ class devices(object):
                 print("get_alldevices - NO HAY INFORMACION")
                 return None
         except Exception as e:
-            print("get_alldevices - Estoy en la excepción")
+            print("get_alldevices - Estoy en la excepcion")
             return None
 
         finally:

@@ -1,4 +1,4 @@
-import requests
+#import requests
 import json
 import mysql.connector
 from .configbdd import config
@@ -6,7 +6,7 @@ from .configbdd import config
 class status(object):
 
     def get_allstatus(self):
-        print("get_allstatus - entro en la función")
+        print("get_allstatus - entro en la funcion")
 
         try:
             con = mysql.connector.connect(**config)
@@ -25,7 +25,7 @@ class status(object):
                 print("get_allstatus - NO HAY INFORMACION")
                 return None
         except Exception as e:
-            print("get_allstatus - Estoy en la excepción")
+            print("get_allstatus - Estoy en la excepcion")
             return None
 
         finally:
