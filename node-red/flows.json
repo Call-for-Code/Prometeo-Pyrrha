@@ -1,0 +1,183 @@
+[
+    {
+        "id": "f4c12b62.afcd18",
+        "type": "tab",
+        "label": "Main",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6b42b9f4.d92e58",
+        "type": "ibmiot in",
+        "z": "f4c12b62.afcd18",
+        "authentication": "boundService",
+        "apiKey": "",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "",
+        "applicationId": "",
+        "deviceType": "+",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": true,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": false,
+        "qos": 0,
+        "x": 90,
+        "y": 260,
+        "wires": [
+            [
+                "ebec409.c0076c",
+                "5d9955c4.f7595c",
+                "32a28377.d77e3c"
+            ]
+        ]
+    },
+    {
+        "id": "b2d54966.206d08",
+        "type": "websocket out",
+        "z": "f4c12b62.afcd18",
+        "name": "Webscokets Server",
+        "server": "",
+        "client": "5f8a7f23.40f4",
+        "x": 1290,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d0e2d590.2f7628",
+        "type": "mysql",
+        "z": "f4c12b62.afcd18",
+        "mydb": "cb778854.3dbbb8",
+        "name": "MySQL Prometeo",
+        "x": 770,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ebec409.c0076c",
+        "type": "function",
+        "z": "f4c12b62.afcd18",
+        "name": "Prepare MySQL Insert",
+        "func": "var timestamp = new Date().valueOf();\n\nvar temperature;\nvar humidity;\nvar co;\n\nif (msg.deviceId.toLowerCase().includes(\"duck\")){\n    // Duck payload is in format '26.30/43.00/18.58' (without quotes)\n    data = msg.payload.Payload.split('/');\n    temperature = parseFloat(data[0]);\n    humidity = parseFloat(data[1]);\n    co = parseFloat(data[2]);\n} else {\n    temperature = msg.payload.Temperature;\n    humidity = msg.payload.Humidity;\n    co = msg.payload.CO;\n}\n\nmsg.topic = \"insert into metrics ( clau, SensorID ,timestamp ,temperature, humidity, CO ) values ('\" + msg._msgid + \"', '\" + msg.deviceId + \"', \" + timestamp + \", \" + temperature + \", \" + humidity  + \", \" +  co +\")\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "d0e2d590.2f7628",
+                "97057a8c.d39178"
+            ]
+        ]
+    },
+    {
+        "id": "92865628.2247b8",
+        "type": "http request",
+        "z": "f4c12b62.afcd18",
+        "name": "New Machine Learning Firefighter Health Prediction",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "http://prometeo-rules-exhausted-klipspringer.eu-de.mybluemix.net/coreDecision/core_decision",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 730,
+        "y": 380,
+        "wires": [
+            [
+                "cc62dbec.636e28"
+            ]
+        ]
+    },
+    {
+        "id": "5d9955c4.f7595c",
+        "type": "function",
+        "z": "f4c12b62.afcd18",
+        "name": "New Prepare ML Request",
+        "func": "var temperature;\nvar humidity;\nvar co;\n\nmsg.headers = {};\nmsg.headers['Content-Type'] = 'application/json';\nmsg.headers['Accept'] = 'application/json';\n\nif (msg.deviceId.toLowerCase().includes(\"duck\")){\n    // Duck payload is in format '26.30/43.00/18.58' (without quotes)\n    data = msg.payload.Payload.split('/');\n    temperature = parseFloat(data[0]);\n    humidity = parseFloat(data[1]);\n    co = parseFloat(data[2]);\n}\nelse\n{\n    temperature = msg.payload.Temperature;\n    humidity = msg.payload.Humidity;\n    co = msg.payload.CO;\n}\n\nflow.set('flowTemp'+ msg._msgid,temperature);\nflow.set('flowHumi'+ msg._msgid,humidity);\nflow.set('flowCO'+ msg._msgid,co);\n\nmsg.payload = { Temperature: temperature, Humidity: humidity, CO_ppm: co };\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 370,
+        "y": 380,
+        "wires": [
+            [
+                "92865628.2247b8"
+            ]
+        ]
+    },
+    {
+        "id": "cc62dbec.636e28",
+        "type": "function",
+        "z": "f4c12b62.afcd18",
+        "name": "ML2status3.0",
+        "func": "var timestamp = new Date().valueOf()/1000;\n\nvar temp = flow.get('flowTemp'+ msg._msgid);\nvar humi = flow.get('flowHumi'+ msg._msgid);\nvar co = flow.get('flowCO'+ msg._msgid);\n\nmsg.payload = {\"fields\":[\"Bombero\",\"Estado\",\"Timestamp\",\"Temp\",\"Humidity\",\"CO\"],\"values\":[msg.deviceId, msg.payload.predictions[0].values[0][0], timestamp, temp, humi, co]};\n\nflow.set('flowTemp'+ msg._msgid);\nflow.set('flowHumi'+ msg._msgid);\nflow.set('flowCO'+ msg._msgid);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1060,
+        "y": 380,
+        "wires": [
+            [
+                "b2d54966.206d08"
+            ]
+        ]
+    },
+    {
+        "id": "32a28377.d77e3c",
+        "type": "debug",
+        "z": "f4c12b62.afcd18",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 310,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "97057a8c.d39178",
+        "type": "debug",
+        "z": "f4c12b62.afcd18",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "5f8a7f23.40f4",
+        "type": "websocket-client",
+        "z": "",
+        "path": "ws://159.8.222.232:31139",
+        "tls": "",
+        "wholemsg": "false"
+    },
+    {
+        "id": "cb778854.3dbbb8",
+        "type": "MySQLdatabase",
+        "z": "",
+        "host": "sl-us-south-1-portal.58.dblayer.com",
+        "port": "25931",
+        "db": "prometeo",
+        "tz": ""
+    }
+]

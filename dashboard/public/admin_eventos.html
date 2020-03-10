@@ -1,0 +1,74 @@
+{% extends "/base.html" %}
+
+{% block content %}
+
+  <section role="main" class="content-body">
+    <header class="page-header">
+      <h2>Administración de Eventos</h2>
+
+      <div class="right-wrapper pull-right">
+        <ol class="breadcrumbs">
+          <li>
+            <a href="{{ url_for('index') }}">
+              <i class="fa fa-home"></i>
+            </a>
+          </li>
+          <li><span>Administración</span></li>
+          <li><span>Eventos</span></li>
+        </ol>
+      </div>
+    </header>
+
+    <section class="panel">
+      <header class="panel-heading">
+        <div class="panel-actions">
+          <a href="#" class="fa fa-caret-down"></a>
+        </div>
+
+        <h2 class="panel-title">Eventos</h2>
+      </header>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="mb-md">
+              <a href="#" class="btn btn-primary">Añadir <i class="fa fa-plus"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-bordered table-striped mb-none" id="datatable-details">
+          <thead>
+            <tr>
+              <th>Id Interno</th>
+							<th>Cod Evento</th>
+              <th>Tipo Evento</th>
+              <th>Num Bomberos</th>
+							<th>Estado</th>
+							<th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for record in eventos %}
+						<tr class="gradeA">
+							<td>{{ record[0] }}</td>
+							<td>{{ record[1] }}</td>
+							<td>{{ record[5] }}</td>
+							<td>{{ record[14] }}</td>
+							<td>{{ record[3] }}</td>
+							<td class="actions">
+								<a href="{{ url_for('admin_eventos_form', eventid=record[0]) }}"><i class="fa fa-pencil"></i></a>
+								<a href="#"><i class="fa fa-trash-o"></i></a>
+								<a href="{{ url_for('report_mediciones', eventid=record[0]) }}"><i class="fa  fa-bar-chart-o"></i></a>
+							</td>
+						</tr>
+
+						{% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+{% endblock %}
