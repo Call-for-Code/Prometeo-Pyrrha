@@ -15,7 +15,17 @@ Prometeo is comprised of 5 different components:
 4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
 5. [Dashboard](SETUP.md#dashboard)
 
-![alt text](https://github.com/joraco-dev/prometeo/blob/master/content/Presentation2.png)
+**Note:** There is a second version of the application under development. It will eventually be composed into separate repos:
+* [Prometeo-Firmware](https://github.com/Code-and-Response/Prometeo-Firmware)
+* [Prometeo-Database](https://github.com/Code-and-Response/Prometeo-Database)
+* [Prometeo-Rules-Decision](https://github.com/Code-and-Response/Prometeo-Rules-Decision)
+* [Prometeo-Watch-App](https://github.com/Code-and-Response/Prometeo-Watch-App)
+* [Prometeo-Web-App](https://github.com/Code-and-Response/Prometeo-Web-App)
+* [Prometeo-Mobile-App](https://github.com/Code-and-Response/Prometeo-Mobile-App)
+* [Prometeo-WebSocket-Server](https://github.com/Code-and-Response/Prometeo-WebSocket-Server)
+* [Prometeo-MQTT-Client](https://github.com/Code-and-Response/Prometeo-MQTT-Client)
+
+![Prometeo v1 architecture](https://github.com/joraco-dev/prometeo/blob/master/content/Presentation2.png)
 
 ## Get started
 
