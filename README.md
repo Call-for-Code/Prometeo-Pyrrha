@@ -15,7 +15,7 @@ Prometeo is comprised of 5 different components:
 4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
 5. [Dashboard](SETUP.md#dashboard)
 
-**Note:** There is a second version of the application under development. It will eventually be composed into separate repos under the [Prometeo Platform organization[(https://github.com/Prometeo-Platform):
+**Note:** There is a second version of the application under development. It will eventually be composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
 * [Prometeo-Firmware](https://github.com/Prometeo-Platform/Prometeo-Firmware)
 * [Prometeo-Database](https://github.com/Prometeo-Platform/Prometeo-Database)
 * [Prometeo-Rules-Decision](https://github.com/Prometeo-Platform/Prometeo-Rules-Decision)
