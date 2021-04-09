@@ -4,15 +4,6 @@ In the face of natural disasters, such as wildfires, Prometeo protects those who
 
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Slack](https://img.shields.io/badge/Join-Slack-blue)](https://callforcode.org/slack)
 
-## The solution at a glance
-
-Prometeo is comprised of 5 different components:
-1. [The sensor](SETUP.md#the-sensor)
-2. [IBM IoT Platform](SETUP.md#ibm-iot-platform)
-3. [Node-RED](SETUP.md#node-red)
-4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
-5. [Dashboard](SETUP.md#dashboard)
-
 **Note:** There is a second version of the application under development. It is now composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
 * [Prometeo-Firmware](https://github.com/Prometeo-Platform/Prometeo-Firmware)
 * [Prometeo-Database](https://github.com/Prometeo-Platform/Prometeo-Database)
@@ -22,6 +13,15 @@ Prometeo is comprised of 5 different components:
 * [Prometeo-Mobile-App](https://github.com/Prometeo-Platform/Prometeo-Mobile-App)
 * [Prometeo-WebSocket-Server](https://github.com/Prometeo-Platform/Prometeo-WebSocket-Server)
 * [Prometeo-MQTT-Client](https://github.com/Prometeo-Platform/Prometeo-MQTT-Client)
+
+## The solution at a glance
+
+Prometeo is comprised of 5 different components:
+1. [The sensor](SETUP.md#the-sensor)
+2. [IBM IoT Platform](SETUP.md#ibm-iot-platform)
+3. [Node-RED](SETUP.md#node-red)
+4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
+5. [Dashboard](SETUP.md#dashboard)
 
 ![Prometeo v1 architecture](https://github.com/joraco-dev/prometeo/blob/master/content/Presentation2.png)
 
