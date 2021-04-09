@@ -2,8 +2,6 @@
 
 In the face of natural disasters, such as wildfires, Prometeo protects those who protect us - the firefighters. With our solution, we've developed a prototype sensor which sends environmental telemetry (temperature, humidity, and smoke concentration). This data is processed by a machine learning algorithm which is able to predict firefighter health, indicating if they are OK, soon to be in danger, or in danger. The goal is to track real-time status, and eventually use aggregated data to make suggestions that improve health outcomes in the long run.
 
-View the [project board to track progress against the 1Q 2020 milestones](https://github.com/Code-and-Response/Prometeo/projects/1).
-
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Slack](https://img.shields.io/badge/Join-Slack-blue)](https://callforcode.org/slack)
 
 ## The solution at a glance
@@ -15,7 +13,7 @@ Prometeo is comprised of 5 different components:
 4. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
 5. [Dashboard](SETUP.md#dashboard)
 
-**Note:** There is a second version of the application under development. It will eventually be composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
+**Note:** There is a second version of the application under development. It is now composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
 * [Prometeo-Firmware](https://github.com/Prometeo-Platform/Prometeo-Firmware)
 * [Prometeo-Database](https://github.com/Prometeo-Platform/Prometeo-Database)
 * [Prometeo-Rules-Decision](https://github.com/Prometeo-Platform/Prometeo-Rules-Decision)
