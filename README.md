@@ -4,7 +4,7 @@ In the face of natural disasters, such as wildfires, Prometeo protects those who
 
 [![License](https://img.shields.io/badge/License-Apache2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0) [![Slack](https://img.shields.io/badge/Join-Slack-blue)](https://callforcode.org/slack)
 
-**Note:** There is a second version of the application under development. It is now composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
+> **Note:** There is a second version of the application under development. It is now composed into separate repos under the [Prometeo Platform organization](https://github.com/Prometeo-Platform):
 * [Prometeo-Firmware](https://github.com/Prometeo-Platform/Prometeo-Firmware)
 * [Prometeo-Database](https://github.com/Prometeo-Platform/Prometeo-Database)
 * [Prometeo-Rules-Decision](https://github.com/Prometeo-Platform/Prometeo-Rules-Decision)
