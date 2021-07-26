@@ -5,16 +5,22 @@
 In the face of natural disasters, such as wildfires, Prometeo protects those who protect us - the firefighters. With our solution, we've developed a prototype sensor which sends environmental telemetry (temperature, humidity, and smoke concentration). This data is processed by a machine learning algorithm which is able to predict firefighter health, indicating if they are OK, soon to be in danger, or in danger. The goal is to track real-time status, and eventually use aggregated data to make suggestions that improve health outcomes in the long run.
 
 > **Note:** The [Prometeo name is now used for the startup behind the open source project](https://prometeoplatform.com/). The project itself is now composed into separate repos under the [Pyrrha Platform organization](https://github.com/Pyrrha-Platform) which is the official Call for Code with the Linux Foundation project name:
-* [Pyrrha-Firmware](https://github.com/Pyrrha-Platform/Pyrrha-Firmware)
-* [Pyrrha-Database](https://github.com/Pyrrha-Platform/Pyrrha-Database)
-* [Pyrrha-Rules-Decision](https://github.com/Pyrrha-Platform/Pyrrha-Rules-Decision)
-* [Pyrrha-Watch-App](https://github.com/Pyrrha-Platform/Pyrrha-Watch-App)
-* [Pyrrha-Dashboard](https://github.com/Pyrrha-Platform/Pyrrha-Dashboard)
-* [Pyrrha-Mobile-App](https://github.com/Pyrrha-Platform/Pyrrha-Mobile-App)
-* [Pyrrha-WebSocket-Server](https://github.com/Pyrrha-Platform/Pyrrha-WebSocket-Server)
-* [Pyrrha-MQTT-Client](https://github.com/Pyrrha-Platform/Pyrrha-MQTT-Client)
 
-## The solution at a glance
+* [Pyrrha](https://github.com/Pyrrha-Platform/Pyrrha)
+* [Pyrrha-Dashboard](https://github.com/Pyrrha-Platform/Pyrrha-Dashboard)
+* [Pyrrha-Database](https://github.com/Pyrrha-Platform/Pyrrha-Database)
+* [Pyrrha-Pyrrha-Deployment-Configurations](https://github.com/Pyrrha-Platform/Pyrrha-Deployment-Configurations)
+* [Pyrrha-Firmware](https://github.com/Pyrrha-Platform/Pyrrha-Firmware)
+* [Pyrrha-Hardware](https://github.com/Pyrrha-Platform/Pyrrha-Hardware)
+* [Pyrrha-Mobile-App](https://github.com/Pyrrha-Platform/Pyrrha-Mobile-App)
+* [Pyrrha-MQTT-Client](https://github.com/Pyrrha-Platform/Pyrrha-MQTT-Client)
+* [Pyrrha-Rules-Decision](https://github.com/Pyrrha-Platform/Pyrrha-Rules-Decision)
+* [Pyrrha-Sensor-Simulator](https://github.com/Pyrrha-Platform/Pyrrha-Sensor-Simulator)
+* [Pyrrha-Watch-App](https://github.com/Pyrrha-Platform/Pyrrha-Watch-App)
+* [Pyrrha-Website](https://github.com/Pyrrha-Platform/Pyrrha-Website)
+* [Pyrrha-WebSocket-Server](https://github.com/Pyrrha-Platform/Pyrrha-WebSocket-Server)
+
+## The solution at a glance (DEPRECATED)
 
 Prometeo is comprised of 5 different components:
 1. [The sensor](SETUP.md#the-sensor)
