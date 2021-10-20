@@ -20,7 +20,7 @@ In the face of natural disasters, such as wildfires, Prometeo protects those who
 * [Pyrrha-Website](https://github.com/Pyrrha-Platform/Pyrrha-Website)
 * [Pyrrha-WebSocket-Server](https://github.com/Pyrrha-Platform/Pyrrha-WebSocket-Server)
 
-## The solution at a glance (DEPRECATED)
+## The solution at a glance (DEPRECATED, SUPERSEDED BY PYRRHA ABOVE)
 
 Prometeo is comprised of 5 different components:
 1. [The sensor](SETUP.md#the-sensor)
