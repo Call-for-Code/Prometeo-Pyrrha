@@ -1,4 +1,4 @@
-Flask==1.0 
+Flask==2.3.2 
 cloudant==2.4.0 
 flasgger==0.6.4 
 Flask-Cors==3.0.9 
